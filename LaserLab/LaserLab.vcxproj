@@ -66,7 +66,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Equipment.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="LaserSource.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mirror.cpp" />
+    <ClCompile Include="Photon.cpp" />
+    <ClCompile Include="Splitter.cpp" />
+    <ClCompile Include="Target.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Equipment.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="LaserSource.h" />
+    <ClInclude Include="Macro.h" />
+    <ClInclude Include="Mirror.h" />
+    <ClInclude Include="Photon.h" />
+    <ClInclude Include="Splitter.h" />
+    <ClInclude Include="Target.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
