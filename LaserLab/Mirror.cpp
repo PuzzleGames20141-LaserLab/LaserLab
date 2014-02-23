@@ -6,13 +6,15 @@
 
 Mirror::Mirror()
 {
+
 	if(!eTexture.loadFromFile("Mirror.png"))
 	{
 		std::cout << "Error: could not load mirror image!" << std::endl;
 	}
 	setTexture(eTexture);
-}
 
+
+}
 void Mirror::reaction(Photon& photon)
 {
 	float mAngle = getRotation();
@@ -30,3 +32,11 @@ void Mirror::reaction(Photon& photon)
 		photon.setVelocity(0.0);
 	}
 }
+/*
+
+void Mirror::render(sf::RenderWindow& window)
+{
+	//sprite_equipment.setTexture(eTexture);
+	//window.draw();
+}
+*/

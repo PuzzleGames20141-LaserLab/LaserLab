@@ -28,6 +28,5 @@ Photon LaserSource::getPhoton(float rad)
 {
 	float angle = getRotation();
 	Photon startP(col, rad, angle);
-	startP.setPosition(LaserSource::getPosition());
 	return startP;
 }

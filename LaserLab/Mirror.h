@@ -8,9 +8,11 @@
 
 class Mirror : public Equipment
 {
+	
 public:
 	Mirror();
-	void reaction(Photon &photon) override;
+	void reaction(Photon &photon);
+	//void render(sf::RenderWindow& window) override;
 };
 
 #endif

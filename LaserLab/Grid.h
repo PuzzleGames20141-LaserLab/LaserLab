@@ -1,7 +1,7 @@
 #ifndef GRID_H
 #define GRID_H
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 #include "Macro.h"
 #include <string.h>

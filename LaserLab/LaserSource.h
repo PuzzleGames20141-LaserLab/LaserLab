@@ -13,7 +13,7 @@ class LaserSource : public Equipment
 public:
 	LaserSource();
 	void setColor(sf::Color myCol);
-	void reaction(Photon &photon) override;
+	void reaction(Photon &photon);
 	Photon getPhoton(float rad);
 };
 

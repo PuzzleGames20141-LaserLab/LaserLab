@@ -15,7 +15,6 @@ Target::Target()
 	isHit = false;
 	setTexture(eTexture);
 }
-
 void Target::reaction(Photon& photon)
 {
 	photon.setVelocity(0.0);

@@ -66,24 +66,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Equipment.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="LaserSource.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Mirror.cpp" />
     <ClCompile Include="Photon.cpp" />
+    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Splitter.cpp" />
     <ClCompile Include="Target.cpp" />
+    <ClCompile Include="ToolManager.cpp" />
+    <ClCompile Include="UserButton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Equipment.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="LaserSource.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Macro.h" />
+    <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Mirror.h" />
     <ClInclude Include="Photon.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="Splitter.h" />
     <ClInclude Include="Target.h" />
+    <ClInclude Include="ToolManager.h" />
+    <ClInclude Include="UserButton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Background\block.png" />
+    <None Include="Background\Capture.PNG" />
+    <None Include="Images\play.png" />
+    <None Include="Images\quit.png" />
+    <None Include="Level\level_1.txt" />
+    <None Include="Level\level_equipment_1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

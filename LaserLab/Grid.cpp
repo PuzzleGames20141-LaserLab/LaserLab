@@ -6,16 +6,13 @@
 
 Grid::Grid()
 {
-	if(!gridTexture.loadFromFile("block.png")) 
+	if(!gridTexture.loadFromFile("Background/block.png")) 
 	{
 		std::cout << "Error: could not load grid image!" << std::endl;
 	}
-	//if(!laserTexture.loadFromFile("laser.png")) 
-	//{
-	//	std::cout << "Error: could not load grid image!" << std::endl;
-	//}
+
 	gridVec = std::vector<std::vector<sf::Sprite>>();
-	gridColor = sf::Color(255,255,255,20);
+	gridColor = sf::Color(255,255,255,200);
 }
 void Grid::loadGrid(std::string* layout)
 {

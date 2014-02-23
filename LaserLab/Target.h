@@ -13,7 +13,7 @@ class Target : public Equipment
 public:
 	Target();
 	bool isSuccess();
-	void reaction(Photon &photon) override;
+	void reaction(Photon &photon);
 	void setColor(sf::Color myCol);
 };
 
