@@ -72,7 +72,9 @@
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="LaserSource.cpp" />
+    <ClCompile Include="LevelInfo.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LevelSelectScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="Mirror.cpp" />
@@ -90,7 +92,9 @@
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="LaserSource.h" />
+    <ClInclude Include="LevelInfo.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="LevelSelectScreen.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Mirror.h" />
@@ -102,11 +106,30 @@
     <ClInclude Include="UserButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Background\background.png" />
     <None Include="Background\block.png" />
-    <None Include="Background\Capture.PNG" />
+    <None Include="Equipments_Image\LaserSource.png" />
+    <None Include="Equipments_Image\Mirror.png" />
+    <None Include="Equipments_Image\Red_Light.png" />
+    <None Include="Equipments_Image\splitter.png" />
+    <None Include="Equipments_Image\Target.png" />
+    <None Include="Equipments_Image\Target_Hit.png" />
+    <None Include="Images\level_select.png" />
     <None Include="Images\play.png" />
     <None Include="Images\quit.png" />
+    <None Include="LevelScreen\level1_button.png" />
+    <None Include="LevelScreen\level2_button.png" />
+    <None Include="LevelScreen\lock.png" />
+    <None Include="LevelScreen\one_star.png" />
+    <None Include="LevelScreen\three_star.png" />
+    <None Include="LevelScreen\two_star.png" />
+    <None Include="LevelScreen\zero_star.png" />
     <None Include="Level\level_1.txt" />
+    <None Include="Level\level_1_info.txt" />
+    <None Include="Level\level_2_info.txt" />
+    <None Include="Level\level_3_info.txt" />
+    <None Include="Level\level_4_info.txt" />
+    <None Include="Level\level_5_info.txt" />
     <None Include="Level\level_equipment_1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

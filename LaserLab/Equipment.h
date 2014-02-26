@@ -9,12 +9,9 @@ class Equipment : public sf::Sprite
 {
 public:
 	Equipment();
-	void reaction(Photon& photon){};
-	//virtual void render(sf::RenderWindow& window) = 0;
-	//void setPosition(float x, float y);
-	sf::Texture eTexture;
-	//sf::Sprite sprite_equipment;
-	
+	virtual void reaction(Photon& photon, std::vector<std::vector<Photon>>& lightPaths) = 0;
+	virtual void myRotate() = 0;
+	virtual void clone(std::shared_ptr<Equipment>& ePtr) = 0;
 };
 
 #endif

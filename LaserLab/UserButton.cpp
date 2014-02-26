@@ -39,5 +39,6 @@ void UserButton::setPosition(float x, float y)
 
 void UserButton::render(sf::RenderWindow& window)
 {
+	sprite_.setTexture(texture_);
 	window.draw(sprite_);
 }

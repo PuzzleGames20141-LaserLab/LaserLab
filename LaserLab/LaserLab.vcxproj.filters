@@ -9,10 +9,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Resource Files\Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Resource Files\Background">
       <UniqueIdentifier>{3af0e2c9-6ebb-4a62-90ad-d3ac5df90bbd}</UniqueIdentifier>
     </Filter>
@@ -22,55 +18,71 @@
     <Filter Include="Resource Files\Level">
       <UniqueIdentifier>{5491779c-4377-4fb6-b993-46a7fa1346c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Equipments_Image">
+      <UniqueIdentifier>{704880ea-af16-45e0-ae01-8204f11c13fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\LevelScreen">
+      <UniqueIdentifier>{12583c3b-43ea-496f-99ec-9262b239aeb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Photon.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Equipment.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mirror.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LaserSource.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Target.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Splitter.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ButtonManager.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameScreen.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelManager.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MenuScreen.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Screen.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ToolManager.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UserButton.cpp">
-      <Filter>Resource Files\Source Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelectScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelInfo.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,12 +134,15 @@
     <ClInclude Include="UserButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LevelInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelectScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Background\block.png">
-      <Filter>Resource Files\Background</Filter>
-    </None>
-    <None Include="Background\Capture.PNG">
       <Filter>Resource Files\Background</Filter>
     </None>
     <None Include="Images\play.png">
@@ -141,6 +156,66 @@
     </None>
     <None Include="Level\level_equipment_1.txt">
       <Filter>Resource Files\Level</Filter>
+    </None>
+    <None Include="Background\background.png">
+      <Filter>Resource Files\Background</Filter>
+    </None>
+    <None Include="Images\level_select.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="Level\level_1_info.txt">
+      <Filter>Resource Files\Level</Filter>
+    </None>
+    <None Include="Level\level_2_info.txt">
+      <Filter>Resource Files\Level</Filter>
+    </None>
+    <None Include="Level\level_3_info.txt">
+      <Filter>Resource Files\Level</Filter>
+    </None>
+    <None Include="Level\level_4_info.txt">
+      <Filter>Resource Files\Level</Filter>
+    </None>
+    <None Include="Level\level_5_info.txt">
+      <Filter>Resource Files\Level</Filter>
+    </None>
+    <None Include="Equipments_Image\LaserSource.png">
+      <Filter>Resource Files\Equipments_Image</Filter>
+    </None>
+    <None Include="Equipments_Image\Mirror.png">
+      <Filter>Resource Files\Equipments_Image</Filter>
+    </None>
+    <None Include="Equipments_Image\Red_Light.png">
+      <Filter>Resource Files\Equipments_Image</Filter>
+    </None>
+    <None Include="Equipments_Image\splitter.png">
+      <Filter>Resource Files\Equipments_Image</Filter>
+    </None>
+    <None Include="Equipments_Image\Target.png">
+      <Filter>Resource Files\Equipments_Image</Filter>
+    </None>
+    <None Include="Equipments_Image\Target_Hit.png">
+      <Filter>Resource Files\Equipments_Image</Filter>
+    </None>
+    <None Include="LevelScreen\level1_button.png">
+      <Filter>Resource Files\LevelScreen</Filter>
+    </None>
+    <None Include="LevelScreen\level2_button.png">
+      <Filter>Resource Files\LevelScreen</Filter>
+    </None>
+    <None Include="LevelScreen\lock.png">
+      <Filter>Resource Files\LevelScreen</Filter>
+    </None>
+    <None Include="LevelScreen\one_star.png">
+      <Filter>Resource Files\LevelScreen</Filter>
+    </None>
+    <None Include="LevelScreen\three_star.png">
+      <Filter>Resource Files\LevelScreen</Filter>
+    </None>
+    <None Include="LevelScreen\two_star.png">
+      <Filter>Resource Files\LevelScreen</Filter>
+    </None>
+    <None Include="LevelScreen\zero_star.png">
+      <Filter>Resource Files\LevelScreen</Filter>
     </None>
   </ItemGroup>
 </Project>

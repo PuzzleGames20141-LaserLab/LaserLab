@@ -20,6 +20,7 @@ private:
 	ButtonManager buttonManager;
 	UserButton playButton;
 	UserButton quitButton;
+	UserButton levelSelectButton;
 	sf::Texture backTexture;
 
 };

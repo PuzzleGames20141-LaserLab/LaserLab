@@ -4,22 +4,27 @@
 #include <SFML\Graphics.hpp>
 #include "Macro.h"
 
-class Photon : public sf::CircleShape
+
+
+class Photon : public sf::Sprite
 {
-	float pAngle;
-	float velocity;
-	std::string polarization;
+
 	std::string color;
+	int dir;
+	float velocity;
 
 public:
-	Photon(sf::Color col, float rad, float angle = 0.0f);
-	float getDirection();
-	void setDirection(float angle);
+	Photon(int initialDir);
+	int getDirection();
 	float getVelocity();
 	void setVelocity(float v);
-	void polarize(std::string &polar);
-	void setColor(std::string &col);
-	void move();
+	void setColor(std::string& newColor);
+	void myRotate(int newDir);
+	void myMove();
+	int getIndex();
+	static sf::Texture lightTexture;
+	static void loadTexture(std::string color);
+
 };
 
 #endif
