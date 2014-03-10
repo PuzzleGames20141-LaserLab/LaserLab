@@ -48,6 +48,11 @@ void Splitter::myRotate()
 	setRotation(this->getRotation()+45);
 }
 
+void Splitter::myRotate_E()
+{
+	myRotate();
+}
+
 void Splitter::loadTexture()
 {
 	if(!(Splitter::sTexture.loadFromFile("Equipments_Image/Splitter.png")))
@@ -56,3 +61,9 @@ void Splitter::loadTexture()
 	}
 
 }
+
+bool Splitter::isHit()
+{
+	return true;
+}
+void Splitter::lightOff(){}

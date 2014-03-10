@@ -13,7 +13,7 @@ Grid::Grid()
 	gridVec = std::vector<std::vector<sf::Sprite>>();
 	//gridColor = sf::Color(255,255,255,20);
 }
-void Grid::loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment>>& equipMap, std::vector<LaserSource>& my_lasers)
+void Grid::loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment>>& equipMap, std::vector<LaserSource>& my_lasers, std::vector<std::shared_ptr<Equipment>>& my_targets)
 {
 	for (int row = 0; row < GRID_HEIGHT; row++) 
 	{
@@ -22,7 +22,7 @@ void Grid::loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment
 		{
 			sf::Sprite block = sf::Sprite();
 			block.setTexture(gridTexture);
-			block.setPosition(MARGIN+col*(BLOCK_SIZE), MARGIN+row*(BLOCK_SIZE));
+			block.setPosition((float)(MARGIN+col*(BLOCK_SIZE)), (float)(MARGIN+row*(BLOCK_SIZE)));
 			rowVec.push_back(block);
 			
 			switch(layout[row][2*col])
@@ -31,7 +31,7 @@ void Grid::loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment
 				{
 					LaserSource myLaser;
 					myLaser.setRotation(270);
-					myLaser.setPosition(2*MARGIN+col*(BLOCK_SIZE), 2*MARGIN+row*(BLOCK_SIZE));
+					myLaser.setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					myLaser.setColor(sf::Color::Red);
 					my_lasers.push_back(myLaser);
 					equipMap.insert(std::pair<int, std::shared_ptr<Equipment>>(row*GRID_WIDTH + col, std::make_shared<LaserSource>(myLaser)));
@@ -41,7 +41,7 @@ void Grid::loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment
 				{
 					LaserSource myLaser;
 					myLaser.setRotation(90);
-					myLaser.setPosition(2*MARGIN+col*(BLOCK_SIZE), 2*MARGIN+row*(BLOCK_SIZE));
+					myLaser.setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					myLaser.setColor(sf::Color::Red);
 					my_lasers.push_back(myLaser);
 					equipMap.insert(std::pair<int, std::shared_ptr<Equipment>>(row*GRID_WIDTH + col, std::make_shared<LaserSource>(myLaser)));
@@ -51,7 +51,7 @@ void Grid::loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment
 				{
 					LaserSource myLaser;
 					myLaser.setRotation(180);
-					myLaser.setPosition(2*MARGIN+col*(BLOCK_SIZE), 2*MARGIN+row*(BLOCK_SIZE));
+					myLaser.setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					myLaser.setColor(sf::Color::Red);
 					my_lasers.push_back(myLaser);
 					equipMap.insert(std::pair<int, std::shared_ptr<Equipment>>(row*GRID_WIDTH + col, std::make_shared<LaserSource>(myLaser)));
@@ -61,7 +61,7 @@ void Grid::loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment
 				{
 					LaserSource myLaser;
 					myLaser.setRotation(0);
-					myLaser.setPosition(2*MARGIN+col*(BLOCK_SIZE), 2*MARGIN+row*(BLOCK_SIZE));
+					myLaser.setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					myLaser.setColor(sf::Color::Red);
 					my_lasers.push_back(myLaser);
 					equipMap.insert(std::pair<int, std::shared_ptr<Equipment>>(row*GRID_WIDTH + col, std::make_shared<LaserSource>(myLaser)));
@@ -71,36 +71,43 @@ void Grid::loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment
 				{
 					Target myTarget;
 					myTarget.setRotation(90);
-					myTarget.setPosition(2*MARGIN+col*(BLOCK_SIZE), 2*MARGIN+row*(BLOCK_SIZE));
+					myTarget.setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					myTarget.setColor(sf::Color::Red);
 					equipMap.insert(std::pair<int, std::shared_ptr<Equipment>>(row*GRID_WIDTH + col, std::make_shared<Target>(myTarget)));
+					my_targets.push_back(equipMap[row*GRID_WIDTH + col]);
 					break;
 				}
 				case DOOR_R_RED:
 				{
 					Target myTarget;
 					myTarget.setRotation(180);
-					myTarget.setPosition(2*MARGIN+col*(BLOCK_SIZE), 2*MARGIN+row*(BLOCK_SIZE));
+					myTarget.setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					myTarget.setColor(sf::Color::Red);
+					//my_targets.push_back(std::make_shared<Target>(myTarget));
 					equipMap.insert(std::pair<int, std::shared_ptr<Equipment>>(row*GRID_WIDTH + col, std::make_shared<Target>(myTarget)));
+					my_targets.push_back(equipMap[row*GRID_WIDTH + col]);
 					break;
 				}
 				case DOOR_D_RED:
 				{
 					Target myTarget;
 					myTarget.setRotation(270);
-					myTarget.setPosition(2*MARGIN+col*(BLOCK_SIZE), 2*MARGIN+row*(BLOCK_SIZE));
+					myTarget.setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					myTarget.setColor(sf::Color::Red);
+					//my_targets.push_back(std::make_shared<Target>(myTarget));
 					equipMap.insert(std::pair<int, std::shared_ptr<Equipment>>(row*GRID_WIDTH + col, std::make_shared<Target>(myTarget)));
+					my_targets.push_back(equipMap[row*GRID_WIDTH + col]);
 					break;
 				}
 				case DOOR_L_RED:
 				{
 					Target myTarget;
 					myTarget.setRotation(0);
-					myTarget.setPosition(2*MARGIN+col*(BLOCK_SIZE), 2*MARGIN+row*(BLOCK_SIZE));
+					myTarget.setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					myTarget.setColor(sf::Color::Red);
+					//my_targets.push_back(std::make_shared<Target>(myTarget));
 					equipMap.insert(std::pair<int, std::shared_ptr<Equipment>>(row*GRID_WIDTH + col, std::make_shared<Target>(myTarget)));
+					my_targets.push_back(equipMap[row*GRID_WIDTH + col]);
 					break;
 				}
 			}

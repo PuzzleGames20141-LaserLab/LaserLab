@@ -17,7 +17,7 @@ class Grid
 	
 public:
 	Grid();
-	void loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment>>& equipMap, std::vector<LaserSource>& my_lasers);
+	void loadGrid(std::string* layout, std::map<int, std::shared_ptr<Equipment>>& equipMap, std::vector<LaserSource>& my_lasers, std::vector<std::shared_ptr<Equipment>>& my_targets);
 	std::vector<std::vector<sf::Sprite>> getSprites();
 
 };

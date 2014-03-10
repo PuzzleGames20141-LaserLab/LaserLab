@@ -11,9 +11,8 @@ Target::Target()
 {
 	setOrigin(BLOCK_SIZE/2, BLOCK_SIZE/2);
 	col = sf::Color::Red;
-	isHit = false;
+	hit = false;
 	setTexture(Target::tTexture);
-
 }
 
 void Target::reaction(Photon& photon, std::vector<std::vector<Photon>>& lightPaths)
@@ -27,14 +26,20 @@ void Target::reaction(Photon& photon, std::vector<std::vector<Photon>>& lightPat
 	int direction = int(angle/45)+1;
 	if(direction == photon.getDirection())
 	{
-		isHit = true;
+		hit = true;
 		setTexture(Target::tHitTexture);
 	}
 }
 
-bool Target::isSuccess()
+void Target::lightOff()
 {
-	return isHit;
+	hit = false;
+	setTexture(Target::tTexture);
+
+}
+bool Target::isHit()
+{
+	return hit;
 }
 void Target::setColor(sf::Color myCol)
 {
@@ -51,5 +56,16 @@ void Target::loadTexture()
 		std::cout << "Error: could not load Laser Source image!" << std::endl;
 	}
 }
-void Target::clone(std::shared_ptr<Equipment>& ePtr){}
+
+void Target::clone(std::shared_ptr<Equipment>& ePtr)
+{
+	Target copyTarget = *this;
+	ePtr = std::make_shared<Target>(copyTarget);
+}
+
 void Target::myRotate(){}
+
+void Target::myRotate_E()
+{
+	setRotation(this->getRotation()+45);
+}

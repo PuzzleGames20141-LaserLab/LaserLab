@@ -14,14 +14,17 @@ private:
     static LevelManager *level_manager;
     LevelManager()
 	{
-		for(int i = 1; i <= LEVEL_NUMBER; i++)
+		for(int i = 1; i <= 30; i++)
 		{
 			std::string levelName = "Level/level_";
-			char num = i + '0';
+			char numStr[10] = {};
+			itoa(i, numStr, 10);
+			std::string num = std::string(numStr);
 			std::string levelKey = "level";
 			levelKey += num;
 			levelName += num;
 			levelName += "_info.txt";
+			std::cout<<levelName<<std::endl;
 			const char * fileName = levelName.c_str();
 			LevelInfo level_info(fileName);
 			levelMap.insert(std::pair<std::string, LevelInfo>(levelKey, level_info));

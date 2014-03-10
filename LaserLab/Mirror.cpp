@@ -14,7 +14,7 @@ Mirror::Mirror()
 void Mirror::reaction(Photon& photon, std::vector<std::vector<Photon>>& lightPaths)
 {
 	float mAngle = getRotation();
-	float pAngle = 360 - 45*(photon.getDirection()-1);
+	float pAngle = (float)(360 - 45*(photon.getDirection()-1));
 	float pAngle_r = pAngle+180 >= 360 ? pAngle-180 : pAngle+180;
 	if(fabs(mAngle - pAngle_r) < 90 || fabs(mAngle - pAngle_r) > 270)
 	{
@@ -38,12 +38,16 @@ void Mirror::clone(std::shared_ptr<Equipment>& ePtr)
 {
 	Mirror copyMirror = *this;
 	ePtr = std::make_shared<Mirror>(copyMirror);
-	
 }
 
 void Mirror::myRotate()
 {
 	setRotation(this->getRotation()+45);
+}
+
+void Mirror::myRotate_E()
+{
+	myRotate();
 }
 
 void Mirror::loadTexture()
@@ -54,3 +58,10 @@ void Mirror::loadTexture()
 	}
 
 }
+
+bool Mirror::isHit()
+{
+	return true;
+}
+
+void Mirror::lightOff(){}

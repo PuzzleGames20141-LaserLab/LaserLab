@@ -84,7 +84,7 @@ void GameScreen::loadGrid()
 {
 	std::string* text;
 	text = loadTXT("Level/level_1.txt");
-	GameScreen::myGrid.loadGrid(text,GameScreen::tool_manager.equipments_on_grid_, GameScreen::tool_manager.my_lasers_);
+	GameScreen::myGrid.loadGrid(text,GameScreen::tool_manager.equipments_on_grid_, GameScreen::tool_manager.my_lasers_, GameScreen::tool_manager.my_targets_);
 }
 
 
@@ -175,6 +175,18 @@ std::string* loadEquipmentTXT(const char* fileName)
 
 void GameScreen::calculatePath()
 {
+	/*
+	std::map<int, std::shared_ptr<Equipment>>::iterator it_on_grid = tool_manager.equipments_on_grid_.begin();
+	for(; it_on_grid!=tool_manager.equipments_on_grid_.end(); it_on_grid ++)
+	{
+		(*it_on_grid).second->lightOff();
+	}
+	*/
+	for(int i = 0; i != GameScreen::tool_manager.my_targets_.size(); i++)
+	{
+		GameScreen::tool_manager.my_targets_[i]->lightOff();
+	}
+	GameScreen::tool_manager.my_targets_[0]->lightOff();
 	sf::FloatRect windowRect(MARGIN, MARGIN, GRID_WIDTH*(BLOCK_SIZE), GRID_HEIGHT*(BLOCK_SIZE));
 	if(lightPaths.size() == 0)
 	{
@@ -204,6 +216,30 @@ void GameScreen::calculatePath()
 			}
 			current = nextPhoton;
 		}
+	}
+	bool isAllHit = true;
+	/*
+	it_on_grid = tool_manager.equipments_on_grid_.begin();
+	for(; it_on_grid!=tool_manager.equipments_on_grid_.end(); it_on_grid ++)
+	{
+		if(!(*it_on_grid).second->isHit())
+		{
+			isAllHit = false;
+			break;
+		}
+	}
+	*/
+	for(int i = 0; i != GameScreen::tool_manager.my_targets_.size(); i++)
+	{
+		if(!GameScreen::tool_manager.my_targets_[0]->isHit())
+		{
+			isAllHit = false;
+			break;
+		}
+	}
+	if(isAllHit)
+	{
+		std::cout<<"all hit"<<std::endl;
 	}
 }
 

@@ -13,7 +13,10 @@ class LaserSource : public Equipment
 public:
 	LaserSource();
 	void setColor(sf::Color myCol);
+	bool isHit() override; //dummy isHit function always return true;
+	void lightOff() override; // dummy lightOff function
 	void myRotate() override; // dummy rotation function
+	void myRotate_E() override; // valid rotation function for Editor mode
 	void reaction(Photon &photon, std::vector<std::vector<Photon>>& lightPaths) override;
 	void clone(std::shared_ptr<Equipment>& ePtr) override; // dummy clone function
 	Photon getPhoton();

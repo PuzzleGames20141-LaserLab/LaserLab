@@ -53,5 +53,21 @@ void LaserSource::loadTexture()
 		std::cout << "Error: could not load LaserSource image!" << std::endl;
 	}
 }
-void LaserSource::clone(std::shared_ptr<Equipment>& ePtr){}
+
+void LaserSource::clone(std::shared_ptr<Equipment>& ePtr)
+{
+	LaserSource copyLaserSource = *this;
+	ePtr = std::make_shared<LaserSource>(copyLaserSource);
+}
+
+void LaserSource::myRotate_E()
+{
+	setRotation(this->getRotation()+45);
+}
+
+bool LaserSource::isHit()
+{
+	return true;
+}
 void LaserSource::myRotate(){}
+void LaserSource::lightOff(){}
