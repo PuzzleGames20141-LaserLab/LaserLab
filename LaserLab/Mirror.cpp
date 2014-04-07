@@ -9,28 +9,70 @@ Mirror::Mirror()
 {
 	setOrigin(BLOCK_SIZE/2, BLOCK_SIZE/2);
 	setTexture(Mirror::mTexture);
+	cost = 10;
+	label = 'a';
 }
 
 void Mirror::reaction(Photon& photon, std::vector<std::vector<Photon>>& lightPaths)
 {
-	float mAngle = getRotation();
-	float pAngle = (float)(360 - 45*(photon.getDirection()-1));
-	float pAngle_r = pAngle+180 >= 360 ? pAngle-180 : pAngle+180;
-	if(fabs(mAngle - pAngle_r) < 90 || fabs(mAngle - pAngle_r) > 270)
+	int mir_Dir = (int)this->getRotation();
+	int photon_Dir = photon.getDirection();
+	int newDir = 0;
+	switch(mir_Dir)
 	{
-		pAngle = pAngle_r + 2 * (mAngle-pAngle_r);
-		if(pAngle < 0) pAngle += 360;
-		if(pAngle >= 360) pAngle -= 360;
-		if(pAngle > 0)
+	case 0:
 		{
-			pAngle = 360-pAngle;
+			if(photon_Dir == 1 || photon_Dir == 3)
+			{
+				newDir = 8 - photon_Dir;
+				photon.myRotate(newDir);
+			}
+			else
+			{
+				photon.setVelocity(0.0);
+			}
+			break;
 		}
-		int newDir = (int)(pAngle/45)+1;
-		photon.myRotate(newDir);
-	}
-	else 
-	{
-		photon.setVelocity(0.0);
+	case 90:
+		{
+			if(photon_Dir == 1 || photon_Dir == 7)
+			{
+				newDir = (12 - photon_Dir)%8;
+				photon.myRotate(newDir);
+			}
+			else
+			{
+				photon.setVelocity(0.0);
+			}
+			break;
+		}
+	case 180:
+		{
+			if(photon_Dir == 5 || photon_Dir == 7)
+			{
+				newDir = 8 - photon_Dir;
+				photon.myRotate(newDir);
+			}
+			else
+			{
+				photon.setVelocity(0.0);
+			}
+			break;
+		}
+	case 270:
+		{
+			if(photon_Dir == 3 || photon_Dir == 5)
+			{
+				newDir = (12 - photon_Dir)%8;
+				photon.myRotate(newDir);
+			}
+			else
+			{
+				photon.setVelocity(0.0);
+			}
+			break;
+		}
+	default: break;
 	}
 }
 
@@ -42,7 +84,7 @@ void Mirror::clone(std::shared_ptr<Equipment>& ePtr)
 
 void Mirror::myRotate()
 {
-	setRotation(this->getRotation()+45);
+	setRotation(this->getRotation()+90);
 }
 
 void Mirror::myRotate_E()
@@ -62,6 +104,11 @@ void Mirror::loadTexture()
 bool Mirror::isHit()
 {
 	return true;
+}
+
+bool Mirror::isLaserSource()
+{
+	return false;
 }
 
 void Mirror::lightOff(){}

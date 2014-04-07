@@ -5,22 +5,42 @@
 #include <cmath>
 #include <SFML\Graphics.hpp>
 
-sf::Texture LaserSource::lTexture;
-LaserSource::LaserSource()
+sf::Texture LaserSource::redTexture;
+sf::Texture LaserSource::blueTexture;
+LaserSource::LaserSource(char col)
 {
-	col = sf::Color::Red;
 	setOrigin(BLOCK_SIZE/2, BLOCK_SIZE/2);
-	setTexture(LaserSource::lTexture);
+	switch(col)
+	{
+	case 'r':
+		{
+			label = '1';
+			color = sf::Color::Red;
+			setTexture(LaserSource::redTexture);
+			break;
+		}
+	case 'b':
+		{
+			label = 'j';
+			color = sf::Color::Blue;
+			setTexture(LaserSource::blueTexture);
+			break;		
+		}
+	default:
+		{
+			label = '1';
+			color = sf::Color::Red;
+			setTexture(LaserSource::redTexture);
+			break;		
+		}
+	}
 }
 void LaserSource::reaction(Photon& photon, std::vector<std::vector<Photon>>& lightPaths)
 {
 	photon.setVelocity(0.0);
 }
 
-void LaserSource::setColor(sf::Color myCol)
-{
-	col = myCol;
-}
+
 
 Photon LaserSource::getPhoton()
 {
@@ -30,7 +50,7 @@ Photon LaserSource::getPhoton()
 		angle = 360 - angle;
 	}
 	int direction  = (int)(angle/45)+1;
-	Photon startP(direction);
+	Photon startP(direction, color);
 	float deltaX = 0;
 	float deltaY = 0;
 	if(direction == 1 || direction == 5)
@@ -48,9 +68,13 @@ Photon LaserSource::getPhoton()
 
 void LaserSource::loadTexture()
 {
-	if(!(LaserSource::lTexture.loadFromFile("Equipments_Image/LaserSource.png")))
+	if(!(LaserSource::redTexture.loadFromFile("Equipments_Image/LaserSource_Red.png")))
 	{
-		std::cout << "Error: could not load LaserSource image!" << std::endl;
+		std::cout << "Error: could not load red LaserSource image!" << std::endl;
+	}
+	if(!(LaserSource::blueTexture.loadFromFile("Equipments_Image/LaserSource_Blue.png")))
+	{
+		std::cout << "Error: could not load blue LaserSource image!" << std::endl;
 	}
 }
 
@@ -62,12 +86,18 @@ void LaserSource::clone(std::shared_ptr<Equipment>& ePtr)
 
 void LaserSource::myRotate_E()
 {
-	setRotation(this->getRotation()+45);
+	setRotation(this->getRotation()+90);
 }
 
 bool LaserSource::isHit()
 {
 	return true;
 }
+
+bool LaserSource::isLaserSource()
+{
+	return true;
+}
+
 void LaserSource::myRotate(){}
 void LaserSource::lightOff(){}

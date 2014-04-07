@@ -7,6 +7,8 @@
 #include "UserButton.h"
 #include "ButtonManager.h"
 
+extern int load_mode;
+
 class MenuScreen : public Screen
 {
 public:
@@ -21,6 +23,7 @@ private:
 	UserButton playButton;
 	UserButton quitButton;
 	UserButton levelSelectButton;
+	UserButton levelEditButton;
 	sf::Texture backTexture;
 
 };

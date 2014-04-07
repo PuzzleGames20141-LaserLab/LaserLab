@@ -18,7 +18,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -41,12 +41,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\SFML-2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SFML-2.1\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\SFML-2.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -66,28 +68,79 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ButtonManager.cpp" />
-    <ClCompile Include="Equipment.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameScreen.cpp" />
-    <ClCompile Include="Grid.cpp" />
-    <ClCompile Include="LaserSource.cpp" />
-    <ClCompile Include="LevelInfo.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="LevelSelectScreen.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MenuScreen.cpp" />
-    <ClCompile Include="Mirror.cpp" />
-    <ClCompile Include="Photon.cpp" />
-    <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="Splitter.cpp" />
-    <ClCompile Include="Target.cpp" />
-    <ClCompile Include="ToolManager.cpp" />
-    <ClCompile Include="UserButton.cpp" />
+    <None Include="Background\background.png" />
+    <None Include="Background\block.png" />
+    <None Include="Background\congratulation.png" />
+    <None Include="Background\transparent_background.png" />
+    <None Include="Equipments_Image\Bomb.png" />
+    <None Include="Equipments_Image\Capacitor.png" />
+    <None Include="Equipments_Image\Capacitor_Charge.png" />
+    <None Include="Equipments_Image\ColorChanger_blue.png" />
+    <None Include="Equipments_Image\ColorChanger_blue_Dark.png" />
+    <None Include="Equipments_Image\ColorChanger_blue_Light.png" />
+    <None Include="Equipments_Image\ColorChanger_red.png" />
+    <None Include="Equipments_Image\ColorChanger_red_Dark.png" />
+    <None Include="Equipments_Image\ColorChanger_red_Light.png" />
+    <None Include="Equipments_Image\Filter_money.png" />
+    <None Include="Equipments_Image\LaserSource.png" />
+    <None Include="Equipments_Image\LaserSource_Blue.png" />
+    <None Include="Equipments_Image\LaserSource_Red.png" />
+    <None Include="Equipments_Image\Light.png" />
+    <None Include="Equipments_Image\Mirror.png" />
+    <None Include="Equipments_Image\Mirror_Dark.png" />
+    <None Include="Equipments_Image\Mirror_Light.png" />
+    <None Include="Equipments_Image\Mirror_money.png" />
+    <None Include="Equipments_Image\Pit.png" />
+    <None Include="Equipments_Image\Red_Light.png" />
+    <None Include="Equipments_Image\splitter.png" />
+    <None Include="Equipments_Image\Splitter_Dark.png" />
+    <None Include="Equipments_Image\Splitter_Light.png" />
+    <None Include="Equipments_Image\Splitter_money.png" />
+    <None Include="Equipments_Image\Target.png" />
+    <None Include="Equipments_Image\Target_Blue.png" />
+    <None Include="Equipments_Image\Target_Hit.png" />
+    <None Include="Equipments_Image\Target_Hit_Blue.png" />
+    <None Include="Equipments_Image\Target_Hit_Red.png" />
+    <None Include="Equipments_Image\Target_Red.png" />
+    <None Include="Equipments_Image\Wall.png" />
+    <None Include="Images\clear_button.png" />
+    <None Include="Images\go_back.png" />
+    <None Include="Images\level_edit.png" />
+    <None Include="Images\level_select.png" />
+    <None Include="Images\next_level_button.png" />
+    <None Include="Images\play.png" />
+    <None Include="Images\quit.png" />
+    <None Include="Images\replay_button.png" />
+    <None Include="Images\save_button.png" />
+    <None Include="LevelEdit\level_equipment_all.txt" />
+    <None Include="LevelScreen\level1_button.png" />
+    <None Include="LevelScreen\level2_button.png" />
+    <None Include="LevelScreen\lock.png" />
+    <None Include="LevelScreen\one_star.png" />
+    <None Include="LevelScreen\three_star.png" />
+    <None Include="LevelScreen\two_star.png" />
+    <None Include="LevelScreen\user_level_button.png" />
+    <None Include="LevelScreen\zero_star.png" />
+    <None Include="Level\level_0_info.txt" />
+    <None Include="Level\level_1.txt" />
+    <None Include="Level\level_1_info.txt" />
+    <None Include="Level\level_2.txt" />
+    <None Include="Level\level_2_info.txt" />
+    <None Include="Level\level_3_info.txt" />
+    <None Include="Level\level_4_info.txt" />
+    <None Include="Level\level_5_info.txt" />
+    <None Include="Level\level_equipment_1.txt" />
+    <None Include="Level\level_equipment_2.txt" />
+    <None Include="UserLevel\level_names.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="ButtonManager.h" />
+    <ClInclude Include="Capacitor.h" />
+    <ClInclude Include="EditScreen.h" />
     <ClInclude Include="Equipment.h" />
+    <ClInclude Include="Filter_Blue.h" />
+    <ClInclude Include="Filter_Red.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Grid.h" />
@@ -98,39 +151,45 @@
     <ClInclude Include="Macro.h" />
     <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="Mirror.h" />
+    <ClInclude Include="MyNode.h" />
     <ClInclude Include="Photon.h" />
+    <ClInclude Include="Pit.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Splitter.h" />
     <ClInclude Include="Target.h" />
     <ClInclude Include="ToolManager.h" />
+    <ClInclude Include="ToolManagerEdit.h" />
     <ClInclude Include="UserButton.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Background\background.png" />
-    <None Include="Background\block.png" />
-    <None Include="Equipments_Image\LaserSource.png" />
-    <None Include="Equipments_Image\Mirror.png" />
-    <None Include="Equipments_Image\Red_Light.png" />
-    <None Include="Equipments_Image\splitter.png" />
-    <None Include="Equipments_Image\Target.png" />
-    <None Include="Equipments_Image\Target_Hit.png" />
-    <None Include="Images\level_select.png" />
-    <None Include="Images\play.png" />
-    <None Include="Images\quit.png" />
-    <None Include="LevelScreen\level1_button.png" />
-    <None Include="LevelScreen\level2_button.png" />
-    <None Include="LevelScreen\lock.png" />
-    <None Include="LevelScreen\one_star.png" />
-    <None Include="LevelScreen\three_star.png" />
-    <None Include="LevelScreen\two_star.png" />
-    <None Include="LevelScreen\zero_star.png" />
-    <None Include="Level\level_1.txt" />
-    <None Include="Level\level_1_info.txt" />
-    <None Include="Level\level_2_info.txt" />
-    <None Include="Level\level_3_info.txt" />
-    <None Include="Level\level_4_info.txt" />
-    <None Include="Level\level_5_info.txt" />
-    <None Include="Level\level_equipment_1.txt" />
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="ButtonManager.cpp" />
+    <ClCompile Include="Capacitor.cpp" />
+    <ClCompile Include="EditScreen.cpp" />
+    <ClCompile Include="Equipment.cpp" />
+    <ClCompile Include="Filter_Blue.cpp" />
+    <ClCompile Include="Filter_Red.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="LaserSource.cpp" />
+    <ClCompile Include="LevelInfo.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LevelSelectScreen.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
+    <ClCompile Include="Mirror.cpp" />
+    <ClCompile Include="MyNode.cpp" />
+    <ClCompile Include="Photon.cpp" />
+    <ClCompile Include="Pit.cpp" />
+    <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Splitter.cpp" />
+    <ClCompile Include="Target.cpp" />
+    <ClCompile Include="ToolManager.cpp" />
+    <ClCompile Include="ToolManagerEdit.cpp" />
+    <ClCompile Include="UserButton.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

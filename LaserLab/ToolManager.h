@@ -10,8 +10,8 @@
 
 #include "Equipment.h"
 #include "LaserSource.h"
-#include "Target.h"
 #include "Macro.h"
+#include "Capacitor.h"
 
 class ToolManager
 {
@@ -37,6 +37,7 @@ public:
 	std::vector<LaserSource> my_lasers_;
 	std::vector<Photon> my_Photons;
 	std::vector<std::shared_ptr<Equipment>> my_targets_;
+	std::vector<std::shared_ptr<Equipment>> my_capacitors_;
 	int changeIdx;
 
 

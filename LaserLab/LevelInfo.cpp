@@ -1,7 +1,9 @@
 #include "LevelInfo.h"
-#include "Grid.h"
 #include <string>
 #include <iostream>	
+#include <fstream>
+#include "LevelManager.h"
+#include "GameScreen.h"
 
 LevelInfo::LevelInfo(const char* fileName)
 {
@@ -11,6 +13,12 @@ LevelInfo::LevelInfo(const char* fileName)
 	bestScore_ = atoi(info[2].c_str());
 	threshold_1_ = atoi(info[3].c_str());
 	threshold_2_ = atoi(info[4].c_str());
+	initialScore_ = atoi(info[5].c_str());
+}
+
+int LevelInfo::getLabel()
+{
+	return label_;
 }
 
 void LevelInfo::lock()
@@ -42,4 +50,41 @@ void LevelInfo::setThreshold(int t1, int t2)
 	threshold_1_ = t1;
 	threshold_2_ = t2;
 }
+
+
+int LevelInfo::getInitialScore()
+{
+	return initialScore_;
+}
+
+
+
+void LevelInfo::saveToFile()
+{
+	std::string levelName = "";
+	if(load_mode == 0)
+	{
+		levelName = "Level/level_";
+		char numStr[10] = {};
+		itoa(label_, numStr, 10);
+		std::string num = std::string(numStr);
+		levelName += num;
+	}
+	else
+	{
+		levelName = "UserLevel/" + user_curr_level;
+	}
+	levelName += "_info.txt";
+	const char * fileName = levelName.c_str();
+	std::ofstream saveFile;
+	saveFile.open(fileName);
+	saveFile << label_ << "\n";
+	saveFile << (int)(isLocked_) << "\n";
+	saveFile << bestScore_ << "\n";
+	saveFile << threshold_1_ << "\n";
+	saveFile << threshold_2_ << "\n";
+	saveFile << initialScore_;
+	saveFile.close();
+}
+
 

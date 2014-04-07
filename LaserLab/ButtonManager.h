@@ -10,6 +10,7 @@
 
 #include "UserButton.h"
 
+
 class ButtonManager
 {
 public:
@@ -20,6 +21,7 @@ public:
 
 	void addButton(const std::string& id, std::shared_ptr<UserButton>& button);
 	void removeButton(const std::string& id);
+	int isSaveButton;
 
 private:
 	sf::FloatRect mouseBounds_;

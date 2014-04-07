@@ -7,4 +7,5 @@ Equipment::Equipment()
 {
 	setOrigin(BLOCK_SIZE/2, BLOCK_SIZE/2);
 	setRotation(0.0);
+	cost = 0;
 }

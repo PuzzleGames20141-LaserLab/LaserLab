@@ -8,11 +8,12 @@
 
 class LaserSource : public Equipment
 {
-	sf::Color col;
+	sf::Color color;
 
 public:
-	LaserSource();
-	void setColor(sf::Color myCol);
+	LaserSource(char col);
+	bool isLaserSource() override; // always return true;
+	int curState() {return -1;}; // dummy curState function always return -1;
 	bool isHit() override; //dummy isHit function always return true;
 	void lightOff() override; // dummy lightOff function
 	void myRotate() override; // dummy rotation function
@@ -20,7 +21,8 @@ public:
 	void reaction(Photon &photon, std::vector<std::vector<Photon>>& lightPaths) override;
 	void clone(std::shared_ptr<Equipment>& ePtr) override; // dummy clone function
 	Photon getPhoton();
-	static sf::Texture lTexture;
+	static sf::Texture redTexture;
+	static sf::Texture blueTexture;
 	static void loadTexture();
 };
 

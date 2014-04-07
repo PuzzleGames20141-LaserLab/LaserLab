@@ -3,6 +3,11 @@
 #include <string>
 
 #include "UserButton.h"
+#include <windows.h>
+#include <shobjidl.h> 
+#include <cmath>
+
+
 
 UserButton::UserButton(const std::string& imageName, sf::Vector2f position)
 	:position_(position)

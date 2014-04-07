@@ -10,8 +10,10 @@ class Mirror : public Equipment
 {
 public:
 	Mirror();
+	bool isLaserSource() override;
 	void reaction(Photon &photon, std::vector<std::vector<Photon>>& lightPaths) override;
 	void clone(std::shared_ptr<Equipment>& ePtr) override;
+	int curState(){ return -1;}; // dummy curState function always return -1;
 	bool isHit() override; //dummy isHit function always return true;
 	void lightOff() override; // dummy lightOff function
 	void myRotate() override;  // valid rotation function for play mode

@@ -4,13 +4,15 @@
 #include<cmath>
 
 sf::Texture Photon::lightTexture;
-Photon::Photon(int initialDir)
+Photon::Photon(int initialDir, sf::Color col)
 {
 	setOrigin(BLOCK_SIZE/2, BLOCK_SIZE/2);
 	setTexture(lightTexture);
 	dir = initialDir;
 	setVelocity((float)BLOCK_SIZE);
 	setRotation((float)45*(initialDir-1));
+	sf::Sprite::setColor(sf::Color::Red);
+	setColor(col);
 }
 
 int Photon::getDirection()
@@ -18,10 +20,6 @@ int Photon::getDirection()
 	return dir;
 }
 
-void Photon::setColor(std::string& newColor)
-{
-	color = newColor;
-}
 
 void Photon::myRotate(int newDir)
 {
@@ -95,9 +93,9 @@ int Photon::getIndex()
 	int col = (x_coord-MARGIN)/BLOCK_SIZE;
 	return row*GRID_WIDTH + col;
 }
-void Photon::loadTexture(std::string fileName)
+void Photon::loadTexture()
 {
-	if(!(Photon::lightTexture.loadFromFile("Equipments_Image/" + fileName)))
+	if(!(Photon::lightTexture.loadFromFile("Equipments_Image/Light.png")))
 	{
 		std::cout << "Error: could not load light image!" << std::endl;
 	}

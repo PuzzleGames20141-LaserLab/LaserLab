@@ -8,22 +8,20 @@
 
 class Photon : public sf::Sprite
 {
-
-	std::string color;
+	char color;
 	int dir;
 	float velocity;
 
 public:
-	Photon(int initialDir);
+	Photon(int initialDir, sf::Color color);
 	int getDirection();
 	float getVelocity();
 	void setVelocity(float v);
-	void setColor(std::string& newColor);
 	void myRotate(int newDir);
 	void myMove();
 	int getIndex();
 	static sf::Texture lightTexture;
-	static void loadTexture(std::string color);
+	static void loadTexture();
 
 };
 
