@@ -18,6 +18,8 @@
 extern int curr_level;
 extern int currentScore;
 extern  std::string user_curr_level;
+extern int canSolve;
+extern int changeIdx;
 
 class GameScreen : public Screen
 {

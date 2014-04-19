@@ -171,41 +171,44 @@ void ToolManagerEdit::update(sf::RenderWindow& window)
 
 				int row = (y-MARGIN)/BLOCK_SIZE;
 				int col = (x-MARGIN)/BLOCK_SIZE;
-				std::shared_ptr<Equipment> new_equipment;
-				(ToolManagerEdit::copy_equipment)->clone(new_equipment);
-				ToolManagerEdit::equipments_on_grid_.insert(std::pair<int, std::shared_ptr<Equipment>>((row*GRID_WIDTH + col), new_equipment));
-				if(ToolManagerEdit::copy_equipment->label == CAPACITOR_R)
+				if(equipments_on_grid_.count(row*GRID_WIDTH + col) == 0)
 				{
-					my_capacitors_.push_back(equipments_on_grid_[row*GRID_WIDTH + col]);
-					equipments_on_grid_[row*GRID_WIDTH + col]->setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
-				}
-				if(ToolManagerEdit::copy_equipment->isLaserSource())
-				{
-					LaserSource * newLaser = NULL;
-					switch(ToolManagerEdit::copy_equipment->label)
+					std::shared_ptr<Equipment> new_equipment;
+					(ToolManagerEdit::copy_equipment)->clone(new_equipment);
+					ToolManagerEdit::equipments_on_grid_.insert(std::pair<int, std::shared_ptr<Equipment>>((row*GRID_WIDTH + col), new_equipment));
+					if(ToolManagerEdit::copy_equipment->label == CAPACITOR_R)
 					{
-					case '1':
-						{
-							newLaser = new LaserSource('r');
-							break;
-						}
-					case 'j':
-						{
-							newLaser = new LaserSource('b');
-							break;
-						}
+						my_capacitors_.push_back(equipments_on_grid_[row*GRID_WIDTH + col]);
+						equipments_on_grid_[row*GRID_WIDTH + col]->setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
 					}
-					newLaser->setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
-					newLaser->setRotation(ToolManagerEdit::copy_equipment->getRotation());
-					my_lasers_.push_back(*newLaser);
+					if(ToolManagerEdit::copy_equipment->isLaserSource())
+					{
+						LaserSource * newLaser = NULL;
+						switch(ToolManagerEdit::copy_equipment->label)
+						{
+						case '1':
+							{
+								newLaser = new LaserSource('r');
+								break;
+							}
+						case 'j':
+							{
+								newLaser = new LaserSource('b');
+								break;
+							}
+						}
+						newLaser->setPosition((float)(2*MARGIN+col*(BLOCK_SIZE)), (float)(2*MARGIN+row*(BLOCK_SIZE)));
+						newLaser->setRotation(ToolManagerEdit::copy_equipment->getRotation());
+						my_lasers_.push_back(*newLaser);
+					}
+					/*
+					if(ToolManagerEdit::copy_equipment->label == CAPACITOR_R  && ToolManagerEdit::state == 1)
+					{
+						my_capacitors_.push_back(equipments_on_grid_[row*GRID_WIDTH + col]);
+					}
+					*/
+					changeIdx = row*GRID_WIDTH + col;
 				}
-				/*
-				if(ToolManagerEdit::copy_equipment->label == CAPACITOR_R  && ToolManagerEdit::state == 1)
-				{
-					my_capacitors_.push_back(equipments_on_grid_[row*GRID_WIDTH + col]);
-				}
-				*/
-				changeIdx = row*GRID_WIDTH + col;
 			}
 
 		}

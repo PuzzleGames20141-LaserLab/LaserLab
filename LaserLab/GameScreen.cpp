@@ -27,6 +27,8 @@
 
 int curr_level = 1;
 int currentScore  = 0;
+int canSolve = 0;
+int changeIdx = 0;
 std::string user_curr_level = "";
 
 void my_callBack_goBack()
@@ -188,7 +190,12 @@ void GameScreen::render(sf::RenderWindow& window)
 	
 	drawScore(window);
 	sf::CircleShape bulb(20);
-	if(autoSolver(window))
+	if (changeIdx >= 0)
+	{
+		canSolve = autoSolver(window) ? 1 : 0;
+		changeIdx = -1;
+	}
+	if(canSolve == 1)
 	{
 		bulb.setFillColor(sf::Color::Green);
 	}
@@ -482,7 +489,14 @@ void GameScreen::calculatePath()
 				{
 					tool_manager.equipments_on_grid_[idx]->reaction(nextPhoton, lightPaths);
 				}
-				lightPaths[i].push_back(nextPhoton);
+				if(nextPhoton.getVelocity() == 0.0)
+				{
+					lightPaths[i].back().setVelocity(0);
+				}
+				else
+				{
+					lightPaths[i].push_back(nextPhoton);
+				}
 
 			}
 			else
@@ -497,6 +511,7 @@ void GameScreen::calculatePath()
 	for(int i = 0; i != lightPaths.size(); i++)
 	{
 		Photon tail = lightPaths[i].back();
+		if(tail.getVelocity() == 0) continue;
 		int tailIdx = tail.getIndex();
 		if(tool_manager.equipments_on_grid_.count(tailIdx) > 0)
 		{
@@ -611,9 +626,18 @@ void GameScreen::drawScore(sf::RenderWindow& window)
 	window.draw(score_text);
 }
 
+
+/*
+**  The aotuSolver function. Basically perform a BFS on the Grid.
+**  Return true if the user can still get to the target with current     
+**  balance. Otherwise return false
+*/
+
 bool GameScreen::autoSolver(sf::RenderWindow& window)
 {
+	// 2-Dimension vector to save all the current equipments on the grid
 	std::vector<std::vector<MyNode>> nodeGrid;
+	// vector initialization
 	for(int i = 0; i != 12; i++)
 	{
 		std::vector<MyNode> rowNode;
@@ -626,12 +650,17 @@ bool GameScreen::autoSolver(sf::RenderWindow& window)
 		}
 		nodeGrid.push_back(rowNode);
 	}
+	// visited map for BFS
 	bool visited[12][15] = {false};
+	// Queue for BFS
 	std::queue<MyNode> myQueue;
+	// target position
 	int end_row;
 	int end_col;
+	// initial direction of the light(laserSource)
 	int initialDir;
 
+	// add all the equipments on grid to the 2-D vector, each node actually records the level depth of one block in 4 directions separately.
 	std::map<int, std::shared_ptr<Equipment>> :: iterator it = GameScreen::tool_manager.equipments_on_grid_.begin();
 	for(; it != GameScreen::tool_manager.equipments_on_grid_.end(); it++)
 	{
@@ -643,12 +672,13 @@ bool GameScreen::autoSolver(sf::RenderWindow& window)
 			{
 				nodeGrid[row][col].label = LASER_SOURCE_U_RED;
 				int dir = (int)((360 - (*it).second->getRotation()) / 90) % 4;
+				// switch the direction of laserSource
 				switch(dir)
 				{
 					case 0:
 					{
-						nodeGrid[row][col].right = -1;
-						nodeGrid[row][col].currDirection = 0;	
+						nodeGrid[row][col].right = -1; // if right, the node represent the laserSource has a -1 depth on right direction
+						nodeGrid[row][col].currDirection = 0; // currDirection set to right
 						break;
 					}
 					case 1:
@@ -670,9 +700,11 @@ bool GameScreen::autoSolver(sf::RenderWindow& window)
 						break;
 					}
 				}
+				// laserSource is the root node of depth -1. push it into queue
 				myQueue.push(nodeGrid[row][col]);
 				break;
 			}
+			// if there is mirror already on grid, save the direction.
 			case MIRROR:
 			{
 				nodeGrid[row][col].label = MIRROR;
@@ -685,16 +717,21 @@ bool GameScreen::autoSolver(sf::RenderWindow& window)
 			}
 		}
 	}
+
+// start of the BFS
 loop: while(!myQueue.empty())
 	{
+		//dequeu
 		MyNode curr = myQueue.front();
 		myQueue.pop();
 		visited[curr.rowIdx][curr.colIdx] = true;
+		// if the dequeud node is the laserSource, the following "if block" only excute once
 		if(curr.label == LASER_SOURCE_U_RED)
 		{
-			int currDir = curr.currDirection;
-			int row = curr.rowIdx;
-			int col = curr.colIdx;
+			int currDir = curr.currDirection; // current direction of the light(node)
+			int row = curr.rowIdx; // current row # of the node
+			int col = curr.colIdx; // current col # of the node
+			// switch the direction of laserSource and move 1 step accordingly
 			switch(currDir)
 			{
 			case 0: col++; break;
@@ -703,14 +740,18 @@ loop: while(!myQueue.empty())
 			case 3: row++; break;
 			default: break;
 			}
+			// while loop when the light has not go out of the boundary and also has not terminated by wall or mirror.
 			while(row >= 0 && row <= 11 && col >= 0 && col <= 14)
 			{
+				// find the target with exsiting equipments
 				if(nodeGrid[row][col].label == DOOR_U_RED)
 				{
-					return true;  // find the target with exsiting mirrors
+					return true;
 				}
+				// the light occurs mirror
 				else if(nodeGrid[row][col].label == MIRROR)
 				{
+					// turn the light according to the direction of the mirror, or break out if the mirror block the light
 					switch(nodeGrid[row][col].mirrorDir)
 					{
 						case 0:
@@ -729,7 +770,7 @@ loop: while(!myQueue.empty())
 							}
 							else
 							{
-								goto loop;
+								goto loop; // break out, terminate searching from LaserSource
 							}
 							break;
 						}
@@ -749,7 +790,7 @@ loop: while(!myQueue.empty())
 							}
 							else
 							{
-								goto loop;
+								goto loop; // break out, terminate searching from LaserSource
 							}
 							break;
 						}
@@ -769,7 +810,7 @@ loop: while(!myQueue.empty())
 							}
 							else
 							{
-								goto loop;
+								goto loop; // break out, terminate searching from LaserSource
 							}
 							break;
 						}
@@ -789,7 +830,7 @@ loop: while(!myQueue.empty())
 							}
 							else
 							{
-								goto loop;
+								goto loop; // break out, terminate searching from LaserSource
 							}
 							break;
 						}
@@ -797,11 +838,12 @@ loop: while(!myQueue.empty())
 				}
 				else if(nodeGrid[row][col].label != ' ')
 				{
-					goto loop;
+					goto loop; // break out, terminate searching from LaserSource
 				}
-				else
+				else // the current block is empty
 				{
-					nodeGrid[row][col].currDirection = currDir;
+					nodeGrid[row][col].currDirection = currDir; // assign direction to current node
+					// assign level depth to the corresponding direction of current node
 					switch(currDir)
 					{
 					case 0: nodeGrid[row][col].right = 0; break;
@@ -810,10 +852,12 @@ loop: while(!myQueue.empty())
 					case 3: nodeGrid[row][col].down = 0; break;
 					default: break;
 					}
+					// if the node is still in bound and not visited, push into queue
 					if(row >= 0 && row <= 11 && col >= 0 && col <= 14 && !visited[row][col])
 					{
 						myQueue.push(nodeGrid[row][col]);
 					}
+					// move one step accordingly
 					switch(currDir)
 					{
 						case 0: col++; break;
@@ -825,18 +869,23 @@ loop: while(!myQueue.empty())
 				}
 			}
 		}
-		// not laser source
+		// if the dequeued node is not LaserSource, the following code always be excuted except for the first time which the node must be a laserSource 
 		else
 		{
-			int currTurn;
+			// for each node there are 2 possibilities to be reflected to.
+			// search both directions
+			int currTurn; // current level depth(number of extra mirrors needed)
 			int currDir = curr.currDirection;
-			int currDir_first;
-			int currDir_second;
+			int currDir_first; // direction of first explore
+			int currDir_second; // direction fo second explore
+			// start point of first explore
 			int row_first = curr.rowIdx;
 			int col_first = curr.colIdx;
+			// start point of second explore
 			int row_second = curr.rowIdx;
 			int col_second = curr.colIdx;
 
+			// initialize the 2 directions to be explored
 			switch(currDir)
 			{
 			case 0:
@@ -845,7 +894,7 @@ loop: while(!myQueue.empty())
 					row_second++;
 					currDir_first = 1;
 					currDir_second = 3;
-					currTurn = curr.right;
+					currTurn = curr.right; // assign previous level depth to the current depth
 					break;
 				}
 			case 1:
@@ -878,11 +927,12 @@ loop: while(!myQueue.empty())
 				}
 			default:break;
 			}
-			//std::cout<< "currTurn: " << currTurn << std::endl;
-			//std::cout<< "currentScore: " << currentScore << std::endl;
+
+			// if previous level depth + 1 exceed the balance, return false
 			if(currTurn+1 > currentScore/10)
 				return false;
 			
+			// first explore, almost the same with the loop dealing with laserSource
 			while(row_first>=0 && row_first<=11 && col_first>=0 && col_first<=14)
 			{
 				if(nodeGrid[row_first][col_first].label == DOOR_U_RED)
@@ -966,7 +1016,7 @@ loop: while(!myQueue.empty())
 							else if(currDir_first == 2)
 							{
 								currDir_first = 3;
-								row_first--;
+								row_first++;
 								continue;
 							}
 							else
@@ -1006,7 +1056,7 @@ loop: while(!myQueue.empty())
 				}
 			}
 
-
+			// second explore, almost the same with the first explore
 secondloop : while(row_second>=0 && row_second<=11 && col_second>=0 && col_second<=14)
 			{
 				if(nodeGrid[row_second][col_second].label == DOOR_U_RED)
@@ -1090,7 +1140,7 @@ secondloop : while(row_second>=0 && row_second<=11 && col_second>=0 && col_secon
 							else if(currDir_second == 2)
 							{
 								currDir_second = 3;
-								row_second--;
+								row_second++;
 								continue;
 							}
 							else
@@ -1133,5 +1183,6 @@ secondloop : while(row_second>=0 && row_second<=11 && col_second>=0 && col_secon
 			}
 		}
 	}
+	// haven't found the target after we explored every block on the grid, return false.
 	return false;
 }

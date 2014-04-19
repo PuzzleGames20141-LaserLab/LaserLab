@@ -65,7 +65,17 @@ void Splitter::reaction(Photon& photon, std::vector<std::vector<Photon>>& lightP
 		std::vector<Photon> newLight;
 		newLight.push_back(newPhoton);
 		lightPaths.push_back(newLight);
+		/*
 		photon.myRotate(newDir_2);
+		*/
+		Photon newPhoton_2(photon.getDirection(), photon.getColor());
+		newPhoton_2.setPosition(x, y);
+		newPhoton_2.myRotate(newDir_2);
+		std::vector<Photon> newLight_2;
+		newLight_2.push_back(newPhoton_2);
+		lightPaths.push_back(newLight_2);
+
+		photon.setVelocity(0);
 		return;
 	}
 	else if((int)(pAngle - sAngle + 540)%360 == 0)

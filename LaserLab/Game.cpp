@@ -48,8 +48,6 @@ void Game::run()
 	while(window.isOpen())
 	{
 		handleInput();
-		//updata();
-
 	    render();
 	}
 }

@@ -1,0 +1,62 @@
+bool GameScreen::autoSolver(sf::RenderWindow& window)
+{
+	//tow-dimension vector, which store the grid information, what equipments are on the grid, and direction of the equioemnt
+	std::vector<std::vector<MyNode>> nodeGrid;
+
+	//two-dimension array, which is used for BFS to check if the node is visited
+	bool visited[12][15] = {false};
+	
+	//queue, which is used to do BFS
+	std::queue<MyNode> myQueue;
+	
+	//1.go through the map which contains all the information of the grid, update the nodeGrid vector
+	
+	/*2.
+	do BFS:
+	while(!queue.isEmpty())
+	{
+		//pre-processing:
+		laser is regard as 0 level;
+		go through from the laser, find the first level laser path. we add node to the queue, if the node is reachable from laser source without any equipment. (if the equipment is already on the grid, the laser path can be regard as the same level.)
+			if(curr.label == LASER_SOURCE_U_RED)
+		{
+			int currDir = curr.currDirection;
+			int row = curr.rowIdx;
+			int col = curr.colIdx;
+			switch(currDir)
+			{
+			case 0: col++; break;
+			case 1: row--; break;
+			case 2: col--; break;
+			case 3: row++; break;
+			default: break;
+			}
+			while(row >= 0 && row <= 11 && col >= 0 && col <= 14)
+			{
+				//check the equipment on the location(row, col);
+				//decided whether continue search.
+			}
+		}
+		
+		
+		//do BFS:
+		get the first node from the queue;
+		start from the first node, we go through the laser path which is perpendicular with the node.direction, it means we need a mirror to implement that.
+		when we get obstacle(walls, lasers, mirrors which has wrong angle, etc.), we stop, and continue search for next node.
+		
+		firstloop:
+		the laser can get two direction by mirror, go through the first direction;
+		
+		second:
+		go throught the second direction.
+		
+		
+		//
+		when we get the target, we compare the level of the laser path and the money we have to make a judge if we can finish the level.
+		
+		
+	}
+	
+	
+	*/
+}

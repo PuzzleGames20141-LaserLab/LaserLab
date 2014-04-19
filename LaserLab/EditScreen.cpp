@@ -542,6 +542,7 @@ void EditScreen::calculatePathEdit()
 	for(int i = 0; i != lightPaths_edit.size(); i++)
 	{
 		Photon tail = lightPaths_edit[i].back();
+		if(tail.getVelocity() == 0) continue;
 		int tailIdx = tail.getIndex();
 		if(tool_manager_edit.equipments_on_grid_.count(tailIdx) > 0)
 		{

@@ -13,7 +13,6 @@ ToolManager::ToolManager()
 	mouseBounds_.height = 1.f;
 	state = 0;
 	state_right = 0;
-	changeIdx = 0;
 }
 
 void ToolManager::update(sf::RenderWindow& window)
@@ -89,12 +88,15 @@ void ToolManager::update(sf::RenderWindow& window)
 			{
 				int row = (y-MARGIN)/BLOCK_SIZE;
 				int col = (x-MARGIN)/BLOCK_SIZE;
-				std::shared_ptr<Equipment> new_equipment;
-				(ToolManager::copy_equipment)->clone(new_equipment);
-				ToolManager::equipments_on_grid_.insert(std::pair<int, std::shared_ptr<Equipment>>((row*GRID_WIDTH + col), new_equipment));
-				ToolManager::equipments_on_grid_move_.insert(std::pair<int, std::shared_ptr<Equipment>>((row*GRID_WIDTH + col), new_equipment));
-				currentScore -= new_equipment->cost;
-				changeIdx = row*GRID_WIDTH + col;
+				if(equipments_on_grid_.count(row*GRID_WIDTH + col) == 0)
+				{
+					std::shared_ptr<Equipment> new_equipment;
+					(ToolManager::copy_equipment)->clone(new_equipment);
+					ToolManager::equipments_on_grid_.insert(std::pair<int, std::shared_ptr<Equipment>>((row*GRID_WIDTH + col), new_equipment));
+					ToolManager::equipments_on_grid_move_.insert(std::pair<int, std::shared_ptr<Equipment>>((row*GRID_WIDTH + col), new_equipment));
+					currentScore -= new_equipment->cost;
+					changeIdx = row*GRID_WIDTH + col;
+				}
 			}
 
 		}

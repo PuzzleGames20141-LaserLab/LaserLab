@@ -38,7 +38,6 @@ public:
 	std::vector<Photon> my_Photons;
 	std::vector<std::shared_ptr<Equipment>> my_targets_;
 	std::vector<std::shared_ptr<Equipment>> my_capacitors_;
-	int changeIdx;
 
 
 private:
