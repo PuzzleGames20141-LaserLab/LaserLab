@@ -230,7 +230,8 @@ void GameScreen::render(sf::RenderWindow& window)
 		bulb.setFillColor(sf::Color::Red);
 	}
 	bulb.setPosition(720, 20);
-	window.draw(bulb);
+	if(isHint == true)
+		window.draw(bulb);
 	//showPath(window, result_paths);
 	if(isHint == true )
     {
