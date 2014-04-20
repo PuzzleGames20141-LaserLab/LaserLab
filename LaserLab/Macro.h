@@ -43,4 +43,13 @@
 #define CAPACITOR_L			'v'
 
 
+
+#define MIRROR_0            'A'
+#define MIRROR_1            'B'
+#define MIRROR_2            'C'
+#define MIRROR_3            'D'
+#define SPLITTER_0          'E'
+#define SPLITTER_1          'F'
+#define SPLITTER_2          'G'
+#define SPLITTER_3          'H'
 #endif

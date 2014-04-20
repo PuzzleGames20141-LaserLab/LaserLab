@@ -20,6 +20,7 @@ public:
 	void myRotate(int newDir);
 	void myMove();
 	int getIndex();
+	void getIndex2(int &row, int &col);
 	static sf::Texture lightTexture;
 	static void loadTexture();
 

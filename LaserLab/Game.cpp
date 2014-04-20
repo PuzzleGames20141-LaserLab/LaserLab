@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <iostream>
+#include <windows.h>
 
 #include "Game.h"
 #include "GameScreen.h"
@@ -48,7 +49,11 @@ void Game::run()
 	while(window.isOpen())
 	{
 		handleInput();
-	    render();
+	    render();        
+		if(hint_time > 0)
+        {
+            Sleep(500);
+        }
 	}
 }
 

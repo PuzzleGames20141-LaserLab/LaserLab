@@ -93,6 +93,25 @@ int Photon::getIndex()
 	int col = (x_coord-MARGIN)/BLOCK_SIZE;
 	return row*GRID_WIDTH + col;
 }
+
+void Photon::getIndex2(int &row, int &col)
+{
+	int deltaX = 0;
+	int deltaY = 0;
+	if(dir == 1 || dir == 5)
+	{
+		deltaX = (int)(40*(3-dir)/8);
+	}
+	else if(dir == 3 || dir == 7)
+	{
+		deltaY = (int)(40*(dir-5)/8);
+	}
+	int x_coord = (int)getPosition().x + deltaX;
+	int y_coord = (int)getPosition().y + deltaY;
+	row = (y_coord-MARGIN)/BLOCK_SIZE;
+	col = (x_coord-MARGIN)/BLOCK_SIZE;
+}
+
 void Photon::loadTexture()
 {
 	if(!(Photon::lightTexture.loadFromFile("Equipments_Image/Light.png")))

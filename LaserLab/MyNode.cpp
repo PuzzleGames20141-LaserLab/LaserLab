@@ -1,9 +1,8 @@
 #include "MyNode.h"
+#include "iostream"
 
 MyNode::MyNode()
 {
-	label = ' ';
-	mirrorDir = -1;
 	rowIdx = -1;
 	colIdx = -1;
 	up = -2;
@@ -11,4 +10,6 @@ MyNode::MyNode()
 	left = -2;
 	right = -2;
 	currDirection = -1;
+	parent = NULL;
+	hit = 0;
 }
